@@ -34,7 +34,7 @@ class IngresoController extends Controller
           ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
           ->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante','i.num_comprobante','i.estado', DB::raw('i.estado ,COUNT(*) as total'))
           ->where('i.num_comprobante', 'LIKE', '%'.$query.'%')
-          ->orwhere ('p.nombre','LIKE','%'.$query.'%')
+          ->orwhere ('i.fecha_hora','LIKE','%'.$query.'%')
           ->orderBy('i.idingreso', 'desc')
           ->paginate(10);
    			return view('compras.ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query]);
