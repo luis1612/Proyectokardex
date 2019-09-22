@@ -1,0 +1,44 @@
+$echo "# Proyectokardex" >> README.md
+$git init
+$git add README.md
+%git add -A // para que nos agrege todos los archivos del proyecto
+%git status // para ver los archivos 
+%git commit -m "first commit"
+%git remote add origin https://github.com/luis1612/Proyectokardex.git
+%git push -u origin master
+
+Como subir proyecto a Github fácilmente  https://www.youtube.com/watch?v=H03E8_HImAU
+
+-podemos usar la consola de windows (cmd) o git cmd
+-nos ubicamos en la ruta del proyecto que vamos a subir ejemplo Cd \xampp\htdocs\SisVenta3.0
+
+-comando: git init
+
+-comando: git add -A // para que nos agrege todos los archivos del proyecto
+-comando opcional: git status // para ver los archivos 
+
+-comando: git commit -m " version del proyecto"
+
+-comando: git remote add origin  mas el link del repositorio https://github.com/luis1612/siskardex_1.0.git
+
+-comando:git push -u origin master -- git push origin master --
+
+
+
+$heroku login
+Create a new Git repository
+Initialize a git repository in a new or existing directory
+
+$ cd my-project/
+$ git init // iniciamos el repositorio
+$ heroku git:remote -a sistemakardex  // para hecer los cambios en git y los suba a repo heroku
+Deploy your application
+Commit your code to the repository and deploy it to Heroku using Git.
+
+$ git add // añadimos todos los archivos que tomara la aplicacion 
+$ git commit -am "make it better" // hacemos un commit de las actualizaciones
+$ git push heroku master // subimos todo a heroku 
+Existing Git repository
+For existing repositories, simply add the heroku remote
+
+$ heroku git:remote -a sistemakardex
