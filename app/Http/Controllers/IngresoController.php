@@ -46,7 +46,7 @@ class IngresoController extends Controller
    		$personas=DB::table('persona')->where('tipo_persona','=','Proveedor')->get();
    		//Obtenemos los artículos
    		$articulos = DB::table('articulo as art')
-         ->select(DB::raw('CONCAT("REF #",art.codigo, "-- ", art.nombre, "-- ", art.contenido, "--  Bodega ", art.bodega) AS articulo'), 'art.idarticulo')
+         ->select(DB::raw('CONCAT ("# ",art.codigo, "-- ", art.nombre, "-- ", art.contenido, "--  Bodega ", art.bodega) AS articulo'), 'art.idarticulo')
          ->where('art.estado', '=', 'Activo')
          ->get();
 
