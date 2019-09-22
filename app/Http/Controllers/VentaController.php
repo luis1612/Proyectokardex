@@ -36,7 +36,6 @@ class VentaController extends Controller
               ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
               ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
               ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.estado', DB::raw('v.estado ,COUNT(*) as totalp'))
-              ->where('v.num_comprobante', 'LIKE', '%'.$query.'%')
               ->orwhere ('a.codigo','LIKE','%'.$query.'%')
               ->orderBy('v.idventa','desc')
               ->groupBy('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.totalp','v.estado')
