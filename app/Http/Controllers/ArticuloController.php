@@ -27,25 +27,20 @@ class ArticuloController extends Controller
    public function index(Request $request)
    {
    		if($request)
-   		{
-   			//Filtro de Busquedas obtenidas desde el formulario
-   			$query=trim($request->get('searchText'));
-   			//Obtenemos los datos de la tabla donde le agregamos los parametros de busqueda
-   			$articulos =DB::table('articulo as a')
-   				->join('categoria as c', 'a.idcategoria','=','c.idcategoria')
-   				-> select('a.idarticulo', 'a.nombre', 'a.codigo', 'a.contenido', 'a.bodega', 'a.stock', 'c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
-   				-> where('a.nombre','LIKE','%'.$query.'%')
-          -> orwhere('a.codigo','LIKE','%'.$query.'%')
-          -> orwhere('a.contenido','LIKE','%'.$query.'%')
-          -> orwhere('a.stock','LIKE','%'.$query.'%')
-          -> orwhere('a.bodega','LIKE','%'.$query.'%')
-          -> orwhere('c.nombre','LIKE','%'.$query.'%')
-   				->orderBy('idarticulo')
-   				->paginate(10);
-
-   			//    Vista(Carpeta/Controlador/Pagina, Parametros que se le envia a la vista)
-   			return view('almacen.articulo.index',["articulos"=>$articulos,"searchText"=>$query]);
-   		}
+      {
+        //Filtro de Busquedas obtenidas desde el formulario
+        $query=trim($request->get('searchText'));
+        //Obtenemos los datos de la tabla donde le agregamos los parametros de busqueda
+        $articulos =DB::table('articulo as a')
+          ->join('categoria as c', 'a.idcategoria','=','c.idcategoria')
+          -> select('a.idarticulo', 'a.nombre', 'a.codigo', 'a.contenido', 'a.bodega', 'a.stock', 'c.nombre as categoria', 'a.descripcion', 'a.imagen', 'a.estado')
+          ->where('a.nombre','LIKE','%'.$query.'%')
+          ->orwhere('a.codigo','LIKE','%'.$query.'%')
+          ->orderBy('idarticulo')
+          ->paginate(10);
+        //    Vista(Carpeta/Controlador/Pagina, Parametros que se le envia a la vista)
+        return view('almacen.articulo.index',["articulos"=>$articulos,"searchText"=>$query]);
+      }
    }
    public function create()
    {

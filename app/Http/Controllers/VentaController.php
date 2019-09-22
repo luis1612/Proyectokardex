@@ -31,19 +31,17 @@ class VentaController extends Controller
    		if($request)
    		{
    			$query=trim($request -> get('searchText'));
-            $ventas=DB::table('venta as v')
-            ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
-            ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
-            ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
-            ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.estado', DB::raw('v.estado ,COUNT(*) as totalp'))
-            ->where('v.num_comprobante', 'LIKE', '%'.$query.'%')
-            ->orwhere ('v.fecha_hora','LIKE','%'.$query.'%')
-            ->orwhere ('p.nombre','LIKE','%'.$query.'%')
-            ->orwhere ('a.codigo','LIKE','%'.$query.'%')
-            ->orderBy('v.idventa','desc')
-            ->groupBy('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.totalp','v.estado')
+              $ventas=DB::table('venta as v')
+              ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
+              ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
+              ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
+              ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.estado', DB::raw('v.estado ,COUNT(*) as totalp'))
+              ->where('v.num_comprobante', 'LIKE', '%'.$query.'%')
+              ->orwhere ('a.codigo','LIKE','%'.$query.'%')
+              ->orderBy('v.idventa','desc')
+              ->groupBy('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.totalp','v.estado')
 
-            ->paginate(10);
+              ->paginate(10);
    			return view('ventas.venta.index',["ventas"=>$ventas,"searchText"=>$query]);
    		}
 
