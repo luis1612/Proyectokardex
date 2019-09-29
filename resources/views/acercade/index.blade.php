@@ -12,8 +12,6 @@
             <div class="row"><!-- Small boxes (Stat box) -->
                 <div class="col-md-6 col-md-offset-3">
                     <h1>Acerca del autor</h1>
-                    <p>Hola, soy <strong>LUIS IBARGUEN</strong>  creador de <a href="#" target="_blank">este sistema</a>.</p>
-                    <p>Tengo 25 años de edad soy de Cartago-valle (Colombia) me gusta mucho la programación (Desarrollo Web) y te agradezco mucho por haber utilizado este sistema te mando un saludo; Espero disfrutes de este maravilloso sistema....</p>
 
                     <h2>SisKardex V1.0 PRO - <small>Sistema Kardex Central Grupo Ferretero</small></h2>
                     <p>SisKardex V1.0 PRO es un sistema web desarrollado con PHP, MySQL , Bootstrap Y Laravel como framework de desarrollo.</p>
@@ -55,9 +53,8 @@
                     <li> <b> Y mucho mucho más </b> </li>
                     </ul>
                     <br><br>
-                    <p><b>Correo electrónico:</b> ibarguen1294@gmail.com</p>
 
-                    <h1 style="text-align: center;"><a href="https://github.com/luis1612" target="_blank"><i class="fa fa-github" aria-hidden="true"></i> Luis Ibarguen.</a></h1>
+                    <h1 style="text-align: center;"><a href="https://github.com/luis1612" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a></h1>
                 </div>
             </div><!-- /.row -->
         </section>
