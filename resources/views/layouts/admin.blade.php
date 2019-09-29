@@ -65,7 +65,7 @@ $readNotifications=auth()->user()->readNotifications;
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{asset('imagenes/avatar.png')}}" class="user-image" alt="User Image">
+                  <img src="{{asset('imagenes/avatar_default.png')}}" class="user-image" alt="User Image">
                   <small class="bg-olive">Conectado</small>
                   <i class=""></i>{{Auth::user()->name}}<b></b>
                   <i class=""></i>{{Auth::user()->tipo_usuario}}<b class="caret"></b>
@@ -73,7 +73,7 @@ $readNotifications=auth()->user()->readNotifications;
                 <ul class="dropdown-menu">
                  <!-- The user image in the menu -->
                   <li class="user-header">
-                      <img src="{{asset('imagenes/avatar.png')}}" class="img-circle" alt="User Image">
+                      <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
 
                       <p>
                           <i class=""></i>{{Auth::user()->name}}<b class=" "></b>
