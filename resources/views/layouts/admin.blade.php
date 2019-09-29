@@ -527,7 +527,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#').DataTable( {
+        $('#testTable').DataTable( {
                   "search": {
                       "smart": true
                   },
