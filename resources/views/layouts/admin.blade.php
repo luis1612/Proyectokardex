@@ -479,7 +479,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#testTable').DataTable( {/*
+        $('#').DataTable( {/*
                     lengthMenu: [
                         [ 10, 25, 50, -1 ],
                         [ '10 rows', '25 rows', '50 rows', 'Show all' ]
@@ -527,7 +527,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#testTable').DataTable( {
+        $('#').DataTable( {
                   "search": {
                       "smart": true
                   },
