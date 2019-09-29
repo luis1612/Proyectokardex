@@ -1,7 +1,7 @@
-<?php 
+<!--<?php 
 $unreadNotifications=auth()->user()->unreadNotifications;
 $readNotifications=auth()->user()->readNotifications;
- ?>
+ ?>-->
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
   <head>
@@ -57,10 +57,11 @@ $readNotifications=auth()->user()->readNotifications;
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Navegación</span>
           </a>
-          <!-- Navbar Right Menu -->
+
+          <!-- Navbar Right Menu --
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
+              <!-- Messages: style can be found in dropdown.less--
                 <li class="dropdown notifications-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Notificaciones
                     <i class="fa fa-bell-o"></i>
@@ -71,7 +72,7 @@ $readNotifications=auth()->user()->readNotifications;
                   <ul class="dropdown-menu"  style="width: 450px;">
                     <li class="header">Usted Tiene {{ $count }} Notificacion(es)</li>
                     <li>
-                      <!-- inner menu: contains the actual data -->
+                      <!-- inner menu: contains the actual data --
                       <ul class="menu" style="max-height: 400px">
                         <h5 class="text-center text-muted">No Leídas (Nuevas)</h5>
                         @foreach($unreadNotifications as $unreadNotification)
@@ -142,7 +143,8 @@ $readNotifications=auth()->user()->readNotifications;
                     </li>
                     <li class="footer"><a href="{{ route('notifications.index') }}"><strong class="text-light-blue">Ver y Administar todas las Notificaciones</strong></a></li>
                   </ul>
-                </li>
+                </li>--> 
+
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
