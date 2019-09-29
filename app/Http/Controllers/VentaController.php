@@ -52,7 +52,7 @@ class VentaController extends Controller
    		//Obtenemos los artículos
    		$articulos = DB::table('articulo as art')
             ->join('detalle_ingreso as di', 'art.idarticulo', '=', 'di.idarticulo')
-            ->select(DB::raw('CONCAT("Ref",art.codigo , art.contenido, art.nombre, art.bodega, art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp')) // ->select(DB::raw('CONCAT("REF #", art.nombre, " -- Bodega ", art.bodega, "-- ", art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp'))
+            ->select(DB::raw("CONCAT('REF #',art.codigo , art.contenido, art.nombre, art.bodega, art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp")) // ->select(DB::raw('CONCAT("REF #", art.nombre, " -- Bodega ", art.bodega, "-- ", art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp'))
             ->where('art.estado', '=', 'Activo')
             ->where('art.stock', '>', '0')
             ->groupBy('articulo', 'art.idarticulo', 'art.stock','art.estado')
