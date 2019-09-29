@@ -2,16 +2,16 @@
 @section ('contenido')
  <div class="shiftnav-content-wrap"><!-- Content Wrapper. Contains page content  class="content-wrapper" class="shiftnav-content-wrap" -->
         <section class="content-header"><!-- Content Header (Page header) -->
-            <h1>Sobre el autor</h1>
+            <h1>Sobre el sistema</h1>
             <ol class="breadcrumb">
                 <li><a href="{{ url('/home') }}"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                <li class="active">Sobre el autor</li>
+                <li class="active">Sobre el sistema</li>
             </ol>
         </section>
         <section class="content"><!-- Main content -->
             <div class="row"><!-- Small boxes (Stat box) -->
                 <div class="col-md-6 col-md-offset-3">
-                    <h1>Acerca del autor</h1>
+                    <h1>Acerca del sistema</h1>
 
                     <h2>SisKardex V1.0 PRO - <small>Sistema Kardex Central Grupo Ferretero</small></h2>
                     <p>SisKardex V1.0 PRO es un sistema web desarrollado con PHP, MySQL , Bootstrap Y Laravel como framework de desarrollo.</p>
