@@ -50,110 +50,22 @@ $readNotifications=auth()->user()->readNotifications;
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Sistema Kardex</b></span>
         </a>
-
-        <!-- Header Navbar: style can be found in header.less -->
+<!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Navegación</span>
           </a>
-
-          <!-- Navbar Right Menu --
+          <!-- Navbar Right Menu -->
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less--
-                <li class="dropdown notifications-menu">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Notificaciones
-                    <i class="fa fa-bell-o"></i>
-                    @if($count=Auth::user()->unreadNotifications->count())
-                    <span style="font-size: 0.8em;" class="label label-warning">{{ $count }}</span>
-                    @endif
-                  </a>
-                  <ul class="dropdown-menu"  style="width: 450px;">
-                    <li class="header">Usted Tiene {{ $count }} Notificacion(es)</li>
-                    <li>
-                      <!-- inner menu: contains the actual data --
-                      <ul class="menu" style="max-height: 400px">
-                        <h5 class="text-center text-muted">No Leídas (Nuevas)</h5>
-                        @foreach($unreadNotifications as $unreadNotification)
-                        @if($unreadNotification->type=="sisKardex\Notifications\IngresoSent")
-                        <li>
-                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa-archive text-aqua"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
-                            <div class="text-muted push-5-t">
-                              <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
-                            </div>
-                          </a>
-                        </li>
-                        @else @if($unreadNotification->type=="sisKardex\Notifications\VentaSent")
-                          <li>
-                            <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa-check-square-o text-success"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
-                              <div class="text-muted push-5-t">
-                                <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
-                              </div>
-                            </a>
-                          </li>
-                        @else
-                        <li>
-                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Ariculo.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa fa-warning text-yellow"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
-                            <div>
-                                <h5>{{ $unreadNotification->data['stock'] }}</h5>
-                            </div>
-                            <div class="text-muted push-5-t">
-                              <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
-                            </div>
-                          </a>
-                        </li>
-                        @endif
-                        @endif
-                        @endforeach
-
-                        <h5 class="text-center text-muted">Leídas (Anteriores)</h5>
-                        @foreach($readNotifications as $readNotification)
-                        @if($readNotification->type=="sisKardex\Notifications\IngresoSent")
-                        <li>
-                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $readNotification->data['link'] }}"><i class="fa fa-archive text-aqua"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
-                            <div class="text-muted push-5-t">
-                              <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
-                            </div>
-                          </a>
-                        </li>
-                        @else @if($readNotification->type=="sisKardex\Notifications\VentaSent")
-                          <li>
-                            <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $readNotification->data['link'] }}"><i class="fa fa-cart-plus text-success"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
-                              <div class="text-muted push-5-t">
-                                <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
-                              </div>
-                            </a>
-                          </li>
-                        @else
-                        <li>
-                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Ariculo.." href="{{ $readNotification->data['link'] }}"><i class="fa fa fa-warning text-yellow"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
-                            <div>
-                                <h5>{{ $readNotification->data['stock'] }}</h5>
-                            </div>
-                            <div class="text-muted push-5-t">
-                              <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
-                            </div>
-                          </a>
-                        </li>
-                        @endif
-                        @endif
-                        @endforeach
-                      </ul>
-                    </li>
-                    <li class="footer"><a href="{{ route('notifications.index') }}"><strong class="text-light-blue">Ver y Administar todas las Notificaciones</strong></a></li>
-                  </ul>
-                </li>--> 
+              <!-- Messages: style can be found in dropdown.less-->
+              
 
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                   @if(Auth::user()->tipo_usuario == 'administrador')
-                      <img src="{{asset('imagenes/avatar_default.png')}}" class="user-image" alt="User Image">
-                    @else(Auth::user()->tipo_usuario == 'consultor' Or  Auth::user()->tipo_usuario == 'asesor') 
-                      <img src="{{asset('imagenes/avatar_default.png')}}" class="user-image" alt="User Image">
-                    @endif
-                    <!--<img src="{{asset('imagenes/avatar.png')}}" class="user-image" alt="User Image">-->
+                  <img src="{{asset('imagenes/avatar.png')}}" class="user-image" alt="User Image">
                   <small class="bg-olive">Conectado</small>
                   <i class=""></i>{{Auth::user()->name}}<b></b>
                   <i class=""></i>{{Auth::user()->tipo_usuario}}<b class="caret"></b>
@@ -161,16 +73,13 @@ $readNotifications=auth()->user()->readNotifications;
                 <ul class="dropdown-menu">
                  <!-- The user image in the menu -->
                   <li class="user-header">
-                    @if(Auth::user()->tipo_usuario == 'administrador')
-                      <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
-                    @else(Auth::user()->tipo_usuario == 'consultor' Or  Auth::user()->tipo_usuario == 'asesor') 
-                      <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
-                    @endif
+                      <img src="{{asset('imagenes/avatar.png')}}" class="img-circle" alt="User Image">
+
                       <p>
                           <i class=""></i>{{Auth::user()->name}}<b class=" "></b>
                           <br>
                           <b>Tipo de Usuario: </b><i class=""></i>{{Auth::user()->tipo_usuario}}<b></b>
-                          <small>Control de abastecimientos e inventario</small> <br>
+                          <small>Control de abastecimientos e inventario</small>
                       </p>
                   </li>
                   
