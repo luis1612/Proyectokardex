@@ -1,7 +1,7 @@
-<!--<?php 
+<?php 
 $unreadNotifications=auth()->user()->unreadNotifications;
 $readNotifications=auth()->user()->readNotifications;
- ?>-->
+ ?>
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
   <head>
@@ -50,7 +50,8 @@ $readNotifications=auth()->user()->readNotifications;
           <!-- logo for regular state and mobile devices -->
           <span class="logo-lg"><b>Sistema Kardex</b></span>
         </a>
-<!-- Header Navbar: style can be found in header.less -->
+
+        <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
           <!-- Sidebar toggle button-->
           <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
@@ -60,12 +61,97 @@ $readNotifications=auth()->user()->readNotifications;
           <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
               <!-- Messages: style can be found in dropdown.less-->
-              
+                <li class="dropdown notifications-menu">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"> Notificaciones
+                    <i class="fa fa-bell-o"></i>
+                    @if($count=Auth::user()->unreadNotifications->count())
+                    <span style="font-size: 0.8em;" class="label label-warning">{{ $count }}</span>
+                    @endif
+                  </a>
+                  <ul class="dropdown-menu"  style="width: 450px;">
+                    <li class="header">Usted Tiene {{ $count }} Notificacion(es)</li>
+                    <li>
+                      <!-- inner menu: contains the actual data -->
+                      <ul class="menu" style="max-height: 400px">
+                        <h5 class="text-center text-muted">No Leídas (Nuevas)</h5>
+                        @foreach($unreadNotifications as $unreadNotification)
+                        @if($unreadNotification->type=="sisKardex\Notifications\IngresoSent")
+                        <li>
+                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa-archive text-aqua"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
+                            <div class="text-muted push-5-t">
+                              <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
+                            </div>
+                          </a>
+                        </li>
+                        @else @if($unreadNotification->type=="sisKardex\Notifications\VentaSent")
+                          <li>
+                            <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa-check-square-o text-success"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
+                              <div class="text-muted push-5-t">
+                                <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
+                              </div>
+                            </a>
+                          </li>
+                        @else
+                        <li>
+                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Ariculo.." href="{{ $unreadNotification->data['link'] }}"><i class="fa fa fa-warning text-yellow"></i> {{ $unreadNotification->data['user'] }} - {{ $unreadNotification->data['text'] }}
+                            <div>
+                                <h5>{{ $unreadNotification->data['stock'] }}</h5>
+                            </div>
+                            <div class="text-muted push-5-t">
+                              <em>Notificado {{ \Carbon\Carbon::parse($unreadNotification->created_at)->diffForHumans() }}</em>
+                            </div>
+                          </a>
+                        </li>
+                        @endif
+                        @endif
+                        @endforeach
 
+                        <h5 class="text-center text-muted">Leídas (Anteriores)</h5>
+                        @foreach($readNotifications as $readNotification)
+                        @if($readNotification->type=="sisKardex\Notifications\IngresoSent")
+                        <li>
+                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $readNotification->data['link'] }}"><i class="fa fa-archive text-aqua"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
+                            <div class="text-muted push-5-t">
+                              <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
+                            </div>
+                          </a>
+                        </li>
+                        @else @if($readNotification->type=="sisKardex\Notifications\VentaSent")
+                          <li>
+                            <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Detalle.." href="{{ $readNotification->data['link'] }}"><i class="fa fa-cart-plus text-success"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
+                              <div class="text-muted push-5-t">
+                                <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
+                              </div>
+                            </a>
+                          </li>
+                        @else
+                        <li>
+                          <a class="font-w600 push-5-t" data-toggle="tooltip" title="Ver Ariculo.." href="{{ $readNotification->data['link'] }}"><i class="fa fa fa-warning text-yellow"></i> {{ $readNotification->data['user'] }} - {{ $readNotification->data['text'] }}
+                            <div>
+                                <h5>{{ $readNotification->data['stock'] }}</h5>
+                            </div>
+                            <div class="text-muted push-5-t">
+                              <em>Notificado {{ \Carbon\Carbon::parse($readNotification->created_at)->diffForHumans() }}</em>
+                            </div>
+                          </a>
+                        </li>
+                        @endif
+                        @endif
+                        @endforeach
+                      </ul>
+                    </li>
+                    <li class="footer"><a href="{{ route('notifications.index') }}"><strong class="text-light-blue">Ver y Administar todas las Notificaciones</strong></a></li>
+                  </ul>
+                </li>
               <!-- User Account: style can be found in dropdown.less -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="{{asset('imagenes/avatar_default.png')}}" class="user-image" alt="User Image">
+                   @if(Auth::user()->tipo_usuario == 'administrador')
+                      <img src="{{asset('imagenes/avatar.png')}}" class="user-image" alt="User Image">
+                    @else(Auth::user()->tipo_usuario == 'consultor' Or  Auth::user()->tipo_usuario == 'asesor') 
+                      <img src="{{asset('imagenes/avatar_default.png')}}" class="user-image" alt="User Image">
+                    @endif
+                    <!--<img src="{{asset('imagenes/avatar.png')}}" class="user-image" alt="User Image">-->
                   <small class="bg-olive">Conectado</small>
                   <i class=""></i>{{Auth::user()->name}}<b></b>
                   <i class=""></i>{{Auth::user()->tipo_usuario}}<b class="caret"></b>
@@ -73,13 +159,16 @@ $readNotifications=auth()->user()->readNotifications;
                 <ul class="dropdown-menu">
                  <!-- The user image in the menu -->
                   <li class="user-header">
+                    @if(Auth::user()->tipo_usuario == 'administrador')
+                      <img src="{{asset('imagenes/avatar.png')}}" class="img-circle" alt="User Image">
+                    @else(Auth::user()->tipo_usuario == 'consultor' Or  Auth::user()->tipo_usuario == 'asesor') 
                       <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
-
+                    @endif
                       <p>
                           <i class=""></i>{{Auth::user()->name}}<b class=" "></b>
                           <br>
                           <b>Tipo de Usuario: </b><i class=""></i>{{Auth::user()->tipo_usuario}}<b></b>
-                          <small>Control de abastecimientos e inventario</small>
+                          <small>Control de abastecimientos e inventario</small> <br>
                       </p>
                   </li>
                   
@@ -112,7 +201,7 @@ $readNotifications=auth()->user()->readNotifications;
 
                     <div class="pull-left image">
                         @if(Auth::user()->tipo_usuario == 'administrador')
-                          <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
+                          <img src="{{asset('imagenes/avatar.png')}}" class="img-circle" alt="User Image">
                         @else(Auth::user()->tipo_usuario == 'consultor' Or  Auth::user()->tipo_usuario == 'asesor') 
                           <img src="{{asset('imagenes/avatar_default.png')}}" class="img-circle" alt="User Image">
                     @endif
@@ -190,13 +279,13 @@ $readNotifications=auth()->user()->readNotifications;
             </li>
              @if(Auth::user()->tipo_usuario == 'administrador' Or  Auth::user()->tipo_usuario == 'consultor')
             <li>
-              <a href="{{url('#')}}">
+              <a href="#">
                 <i class="fa fa-book"></i> <span>Inventario</span>
               </a>
             </li> 
               @endif
              <li>
-              <a href="{{url('#')}}">
+              <a href="#">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
                 <small class="label pull-right bg-red">PDF</small>
               </a>
@@ -308,39 +397,182 @@ $readNotifications=auth()->user()->readNotifications;
                         <li>
                             <a href="javascript:;">
                                 <h4 class="control-sidebar-subheading">
-                                    Custom Template Design
+                                    CALCULADORA
                                     <span class="pull-right-container">
-                      <span class="label label-success pull-right">95%</span>
+                      <span class="label label-success pull-right"></span>
                     </span>
                                 </h4>
 
                                 <div class="progress progress-xxs">
-                                    <div class="progress-bar progress-bar-success" style="width: 95%"></div>
+                                    <div class="progress-bar progress-bar-success" style="width: 100%"></div>
                                 </div>
                             </a>
                         </li>
                     </ul>
                     <!-- /.control-sidebar-menu -->
-                    <form name="calc"> 
-                    <input type="Text" name="operando1" value="0" size="12"> 
-                    <br> 
-                    <input type="Text" name="operando2" value="0" size="12"> 
-                    <br> 
-                    <input type="Button" name="" value=" + " onclick="calcula('+')"> 
-                    <input type="Button" name="" value=" - " onclick="calcula('-')"> 
-                    <input type="Button" name="" value=" X " onclick="calcula('*')"> 
-                    <input type="Button" name="" value=" / " onclick="calcula('/')"> 
-                    <br> 
-                    <input type="Text" name="resultado" value="0" size="12"> 
-                    </form>
-                    <script> 
-                      function calcula(operacion){ 
-                          var operando1 = document.calc.operando1.value 
-                          var operando2 = document.calc.operando2.value 
-                          var result = eval(operando1 + operacion + operando2) 
-                          document.calc.resultado.value = result 
-                      } 
+                    <title>CALCULADORA</title>
+                     <style type="text/css">
+                      #calculadora {background: gray; border: 0;}
+                      #calculadora td {padding: 4px;}
+                      .cajita_valor {background-color: #acff38; color: #467702; border: 1px solid #454545; width: 130px; height: 26px; font-family: Arial, Helvetica; font-size: 20px; line-height: 26  px; text-align: right; }
+                      .boton {width: 24px; border: 1px solid #000; font-family: Arial; font-size: 12px; cursor: hand; background-color: #454545;}  
+                      .boton_largo { width: 62px; border: 1px solid #000;  font-family: Arial; font-size: 12px; cursor: hand; background-color: #fff;}
+                      .funcion {font-weight: bold; color: #b00;}
+                    </style>
+                    <script>
+                            //Declaracion de variables
+                          var num1 = 0;
+                          var num2 = 0;
+                          var opera;
+
+                        //Función que coloca el número presionado
+                        function darNumero(numero){
+                            if(num1==0 && num1 !== '0.'){
+                                num1 = numero;
+                            }else{
+                                num1 += numero;
+                            }
+                            refrescar();
+                        }
+
+                        //Función que coloca la coma al presionar dicho botón
+                        function darComa(){
+                            if(num1 == 0) {
+                                num1 = '0.';
+                            } else if(num1.indexOf('.') == -1) {
+                                num1 += '.';
+                            }
+                            refrescar();
+                        }
+
+                        //Función que coloca la C al presionar dicho botón
+                        function darC(){
+                            num1 = 0;
+                            num2 = 0;
+                            refrescar();
+                        }
+
+
+                        //Esta función realiza las distintas operaciones aritméticas en función del botón pulsado
+                        function operar(valor){
+                            if (num1 == 0){
+                                num1 = parseFloat(document.getElementById("valor_numero").value);
+                            }
+                            num2 = parseFloat(num1);
+                            num1= 0;
+                            opera = valor;
+                        }
+
+                        //Función para pulsar igual
+                            /*
+                          suma = 1
+                          resta = 2
+                          multiplicacion = 3
+                          division = 4
+                          potencia = 5
+                        */
+
+                        function esIgual(){
+                            num1 = parseFloat(num1);
+                            switch (opera){
+                                case 1:
+                                    num1 += num2;
+                                break;
+                                case 2:
+                                    num1 = num2 - num1;
+                                break;
+                                case 3:
+                                    num1 *= num2;
+                                break;
+                                case 4:
+                                    num1 = num2 / num1;
+                                break;
+                                case 5:
+                                    num1 = Math.pow(num2, num1);
+                                break;
+                            }
+                            refrescar();
+                            num2 = parseFloat(num1);
+                            num1 = 0;
+                        }
+
+                        function refrescar(){
+                            document.getElementById("valor_numero").value = num1;
+                        }
                     </script>
+                  </head>
+                  <body>
+                      <table id="calculadora">
+                          <tr>
+                              <td colspan="4">
+                                  <input type="text" id="valor_numero" maxlength="20" value="0" class="cajita_valor" readonly="true">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2">
+                                  <input type="Button" id="potencia" value="exp" class="boton_largo funcion" onclick="operar(5)">
+                              </td>
+                              <td>
+                                  <input type="Button" id="Dividir" value="/" class="boton funcion" onclick="operar(4)">
+                              </td>
+                              <td>
+                                  <input type="Button" id="Multiplicar" value="x" class="boton funcion" onclick="operar(3)">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <input type="Button" id="7" value="7" class="boton" onclick="darNumero('7')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="8" value="8" class="boton" onclick="darNumero('8')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="9" value="9" class="boton" onclick="darNumero('9')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="Restar" value="-" class="boton funcion">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <input type="Button" id="4" value="4" class="boton" onclick="darNumero('4')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="5" value="5" class="boton" onclick="darNumero('5')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="6" value="6" class="boton" onclick="darNumero('6')">
+                              </td>
+                          <td>
+                            <input type="Button" id="Sumar" value="+" class="boton funcion" onclick="operar(1)">
+                          </td>
+                          </tr>
+                          <tr>
+                              <td>
+                                  <input type="Button" id="1" value="1" class="boton" onclick="darNumero('1')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="2" value="2" class="boton" onclick="darNumero('2')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="3" value="3" class="boton" onclick="darNumero('3')">
+                              </td>
+                              <td>
+                                  <input type="Button" id="igual" value="=" class="boton funcion" onclick="esIgual()">
+                              </td>
+                          </tr>
+                          <tr>
+                              <td colspan="2">
+                                  <input type="Button" id="0" value="0" class="boton_largo" onclick="darNumero('0')">
+                              </td>
+                        <td>
+                                  <input type="Button" id="," value="," class="boton" onclick="darComa()">
+                              </td>
+                            <td>
+                          <input type="Button" id="C" value="C" class="boton funcion" onclick="darC()">
+                            </td>
+                          </tr>
+                      </table>
                 </div>
                 <!-- /.tab-pane -->
                 <!-- Stats tab content -->
@@ -358,12 +590,16 @@ $readNotifications=auth()->user()->readNotifications;
                           <th>/ Peso:caja</th>
                         </tr>
                         <tr>
-                          <td>13 X 41 </td>
+                          <td>13 X 43 </td>
                           <td>14.3 kg</td>
+                        </tr>
+                         <tr>
+                          <td>19.5X88</td>
+                          <td>22.97 kg</td>
                         </tr>
                         <tr>
                           <td>20 X 20 </td>
-                          <td>18,6 kg</td>
+                          <td>24,7 kg</td>
                         </tr>
                         <tr>
                           <td>20 X 30 </td>
@@ -378,6 +614,10 @@ $readNotifications=auth()->user()->readNotifications;
                           <td>22,4 kg</td>
                         </tr>
                         <tr>
+                          <td>25 X 25 </td>
+                          <td>26 kg</td>
+                        </tr>
+                        <tr>
                           <td>25 X 35 </td>
                           <td>17,1 kg</td>
                         </tr>
@@ -390,8 +630,16 @@ $readNotifications=auth()->user()->readNotifications;
                           <td>17,1 kg</td>
                         </tr>
                         <tr>
+                          <td>25.4X50</td>
+                          <td>30 kg</td>
+                        </tr>
+                        <tr>
                           <td>28 X 57</td>
                           <td>23,5 kg</td>
+                        </tr>
+                        <tr>
+                          <td>23.9X42</td>
+                          <td>45,1 kg</td>
                         </tr>
                         <tr>
                           <td>30 X 45 </td>
@@ -429,13 +677,17 @@ $readNotifications=auth()->user()->readNotifications;
                           <td>50 X 50</td>
                           <td>25 kg</td>
                         </tr>
+                         <tr>
+                          <td>51 X 51</td>
+                          <td>28,5 kg</td>
+                        </tr>
                         <tr>
                           <td>55 X 55</td>
                           <td>27,7 kg</td>
                         </tr>
                         <tr>
                           <td>56 X 56 </td>
-                          <td>28 kg</td>
+                          <td>31,7 kg</td>
                         </tr>
                         <tr>
                           <td>57 X 57  </td>
@@ -479,7 +731,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#').DataTable( {/*
+        $('#testTable').DataTable( {/*
                     lengthMenu: [
                         [ 10, 25, 50, -1 ],
                         [ '10 rows', '25 rows', '50 rows', 'Show all' ]
@@ -527,7 +779,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#').DataTable( {
+        $('#ttTable').DataTable( {
                   "search": {
                       "smart": true
                   },
