@@ -23,7 +23,7 @@ class CreateArticuloTable extends Migration
             $table->text('contenido')->nullable();
             $table->text('bodega');
             $table->decimal('stock', 11,2);
-            $table->string('descripcion',128);
+            $table->string('descripcion',128)->nullable();
             $table->string('imagen', 128)->nullable();
             $table->string('estado', 50)->nullable();
 
