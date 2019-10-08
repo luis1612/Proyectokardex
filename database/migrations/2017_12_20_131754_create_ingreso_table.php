@@ -18,8 +18,8 @@ class CreateIngresoTable extends Migration
 
             $table->integer('idproveedor')->unsigned();
             $table->string('tipo_comprobante', 50);
-            $table->string('num_comprobante',50);
-
+            $table->string('num_comprobante');
+            $table->timestamp('fecha_hora')->nullable();
             $table->string('estado', 50);
 
             $table->timestamps();

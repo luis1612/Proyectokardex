@@ -22,7 +22,7 @@ class CreateVentaTable extends Migration
             $table->string('tipo_comprobante', 50);
             $table->integer('num_comprobante');
             $table->dateTime('fecha_hora');
-            $table->decimal('total_P', 11,2);
+            $table->decimal('totalp', 11,2);
             $table->string('estado', 20);
 
             $table->timestamps();
