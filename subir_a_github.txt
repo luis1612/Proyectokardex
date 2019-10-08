@@ -35,7 +35,7 @@ $ heroku git:remote -a sistemakardex  // para hecer los cambios en git y los sub
 Deploy your application
 Commit your code to the repository and deploy it to Heroku using Git.
 
-$ git add // añadimos todos los archivos que tomara la aplicacion 
+$ git add . // añadimos todos los archivos que tomara la aplicacion 
 $ git commit -am "make it better" // hacemos un commit de las actualizaciones
 $ git push heroku master // subimos todo a heroku 
 Existing Git repository
