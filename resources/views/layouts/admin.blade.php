@@ -277,7 +277,7 @@ $readNotifications=auth()->user()->readNotifications;
             <div class="tab-content">
                 <!-- Home tab content -->
                 <div class="tab-pane active" id="control-sidebar-home-tab">
-                    <h5>Inicio 4-Febrero-2019</h5>
+                    <h5></h5>
                     <h3 class="control-sidebar-heading">Números Telefonicos</h3>
                     <ul class="control-sidebar-menu">
                         <li>
