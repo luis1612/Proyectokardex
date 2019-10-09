@@ -26,37 +26,40 @@ class IngresoController extends Controller
    //Todos estos metodos estan asociados con nuestras rutas resources
    public function index(Request $request)
    {
-   		if($request)
-   		{
-   			$query=trim($request -> get('searchText'));
-          $ingresos=DB::table('ingreso as i')
-          ->join('persona as p', 'i.idproveedor', '=', 'p.idpersona')
-          ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
-          ->select('i.idingreso', 'p.nombre', 'i.tipo_comprobante','i.num_comprobante','i.estado', DB::raw('i.estado ,COUNT(*) as total'))
-          ->where('p.nombre', 'LIKE', '%'.$query.'%')
-          ->orwhere ('p.nombre','LIKE','%'.$query.'%')
-          ->orderBy('i.num_comprobante', 'desc')
-          ->paginate(10);
-   			return view('compras.ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query]);
-   		}
+      if($request)
+      {
+        $query=trim($request -> get('searchText'));
+        $ingresos=DB::table('ingreso as i')
+        ->join('persona as p', 'i.idproveedor', '=', 'p.idpersona')
+        ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
+        ->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante','i.num_comprobante','i.estado', DB::raw('i.estado ,COUNT(*) as total'))
+        ->where('i.num_comprobante', 'LIKE', '%'.$query.'%')
+        ->orwhere ('p.nombre','LIKE','%'.$query.'%')
+        ->orwhere ('i.fecha_hora','LIKE','%'.$query.'%')
+        ->orwhere ('i.tipo_comprobante','LIKE','%'.$query.'%')
+        ->orderBy('i.idingreso', 'desc')
+        ->groupBy('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado')
+        ->paginate(10);
+        return view('compras.ingreso.index',["ingresos"=>$ingresos,"searchText"=>$query]);
+      }
    }
    public function create()
    {
-   		//Obtenemos los proveedores
-   		$personas=DB::table('persona')->where('tipo_persona','=','Proveedor')->get();
-   		//Obtenemos los artículos
-   		$articulos = DB::table('articulo as art')
-          ->select(DB::raw('CONCAT("REF #",art.codigo, "-- ", art.nombre, "-- ", art.contenido, "--  Bodega ", art.bodega,"-- ", art.stock) AS articulo'), 'art.idarticulo')
+      //Obtenemos los proveedores
+      $personas=DB::table('persona')->where('tipo_persona','=','Proveedor')->get();
+      //Obtenemos los artículos
+      $articulos = DB::table('articulo as art')
+         ->select(DB::raw('CONCAT("REF #",art.codigo, "-- ", art.nombre, "-- ", art.contenido, "--  Bodega ", art.bodega) AS articulo'), 'art.idarticulo')
          ->where('art.estado', '=', 'Activo')
          ->get();
 
-   		return view("compras.ingreso.create",["personas"=>$personas,"articulos"=>$articulos]);
+      return view("compras.ingreso.create",["personas"=>$personas,"articulos"=>$articulos]);
    }
    public function store(IngresoFormRequest $request)
    {
-   		try{
-   			DB::beginTransaction();
-   			$ingreso = new Ingreso();
+      try{
+        DB::beginTransaction();
+        $ingreso = new Ingreso();
                 $ingreso -> idproveedor = $request -> get('idproveedor');
                 $ingreso -> tipo_comprobante = $request -> get('tipo_comprobante');
                 //$ingreso -> serie_comprobante = $request -> get('serie_comprobante');
@@ -97,21 +100,21 @@ class IngresoController extends Controller
 
             DB::commit();
 
-   		}catch( \Exception $e)
-   		{
-   			DB::rollback();
-   		}
+      }catch( \Exception $e)
+      {
+        DB::rollback();
+      }
 
-   		return \Redirect::to('compras\ingreso');
+      return \Redirect::to('compras\ingreso');
    }
    public function show($id)
    {
-   		$ingreso=DB::table('ingreso as i')
+      $ingreso=DB::table('ingreso as i')
             ->join('persona as p', 'i.idproveedor', '=', 'p.idpersona')
             ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
             ->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado', DB::raw('i.estado,COUNT(*) as total'))
             ->where('i.idingreso', '=', $id)
-            ->groupBy('i.idingreso','p.nombre', 'i.tipo_comprobante', 'i.num_comprobante','i.estado')
+            ->groupBy('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado')
             ->first();
 
         $detalles=DB::table('detalle_ingreso as d')
@@ -120,14 +123,14 @@ class IngresoController extends Controller
             ->where('d.idingreso', '=', $id)
             ->get();
 
-   		return view("compras.ingreso.show",["ingreso"=>$ingreso,"detalles"=>$detalles]);
+      return view("compras.ingreso.show",["ingreso"=>$ingreso,"detalles"=>$detalles]);
    }
    
    public function destroy($id)
    {
-	   	$ingreso = Ingreso::findOrFail($id);
-	   	$ingreso->Estado='C';
-	   	$ingreso->update();
-	   	return \Redirect::to('compras/ingreso');
+      $ingreso = Ingreso::findOrFail($id);
+      $ingreso->Estado='C';
+      $ingreso->update();
+      return \Redirect::to('compras/ingreso');
    }
 }
