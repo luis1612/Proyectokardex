@@ -28,45 +28,45 @@ class VentaController extends Controller
    //Todos estos metodos estan asociados con nuestras rutas resources
    public function index(Request $request)
    {
-   		if($request)
-   		{
-   			$query=trim($request -> get('searchText'));
-              $ventas=DB::table('venta as v')
-              ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
-              ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
-              ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
-              ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.estado', DB::raw('v.estado , COUNT(*) as totalp'))
-              ->orwhere ('a.codigo','LIKE','%'.$query.'%')
-              ->orderBy('v.idventa','desc')
-              ->paginate(10);
-   			return view('ventas.venta.index',["ventas"=>$ventas,"searchText"=>$query]);
-   		}
+      if($request)
+      {
+        $query=trim($request -> get('searchText'));
+            $ventas=DB::table('venta as v')
+            ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
+            ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
+            ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
+            ->select('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.estado', DB::raw('v.estado ,COUNT(*) as totalp'))
+            ->where('v.num_comprobante', 'LIKE', '%'.$query.'%')
+            ->orwhere ('v.fecha_hora','LIKE','%'.$query.'%')
+            ->orwhere ('p.nombre','LIKE','%'.$query.'%')
+            ->orwhere ('a.codigo','LIKE','%'.$query.'%')
+            ->orderBy('v.idventa','desc')
+            ->groupBy('v.idventa', 'v.fecha_hora', 'p.nombre', 'v.tipo_comprobante', 'v.num_comprobante','a.codigo','v.totalp','v.estado')
+
+            ->paginate(100);
+        return view('ventas.venta.index',["ventas"=>$ventas,"searchText"=>$query]);
+      }
 
    }
-
-
    public function create()
    {
-   		//Obtenemos los Clientes
-   		$personas=DB::table('persona')->where('tipo_persona','=','Cliente')->get();
-   		//Obtenemos los artículos
-   		$articulos = DB::table('articulo as art')
+      //Obtenemos los Clientes
+      $personas=DB::table('persona')->where('tipo_persona','=','Cliente')->get();
+      //Obtenemos los artículos
+      $articulos = DB::table('articulo as art')
             ->join('detalle_ingreso as di', 'art.idarticulo', '=', 'di.idarticulo')
-            ->select(DB::raw('CONCAT("REF #", art.nombre, " -- Bodega ", art.bodega, "-- ", art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp'))
+            ->select(DB::raw('CONCAT("REF #",art.codigo, " -- " ,art.contenido," -- " , art.nombre, " -- Bodega ", art.bodega, "-- ", art.stock) AS articulo'), 'art.idarticulo', 'art.stock',DB::raw('art.estado ,COUNT(*) as totalp')) //para hacer un promedio de todos los precios ingresados, si quiero el ultimo solo tengo que modificar esta ultima consulta
             ->where('art.estado', '=', 'Activo')
             ->where('art.stock', '>', '0')
             ->groupBy('articulo', 'art.idarticulo', 'art.stock','art.estado')
             ->get();
-   		return view("ventas.venta.create",["personas"=>$personas,"articulos"=>$articulos]);
+      return view("ventas.venta.create",["personas"=>$personas,"articulos"=>$articulos]);
    }
-
-
-
    public function store(VentaFormRequest $request)
    {
-   		try{
-   			DB::beginTransaction();
-   			 $venta = new Venta();
+      try{
+        DB::beginTransaction();
+         $venta = new Venta();
                 $venta -> idcliente = $request -> get('idcliente');
                 $venta -> tipo_comprobante = $request -> get('tipo_comprobante');
                 $venta -> num_comprobante = $request -> get('num_comprobante');
@@ -126,11 +126,11 @@ class VentaController extends Controller
             DB::rollback();
         }
 
-   		return \Redirect::to('ventas\venta');
+      return \Redirect::to('ventas\venta');
    }
    public function show($id)
    {
-   		$venta=DB::table('venta as v')
+      $venta=DB::table('venta as v')
             ->join('persona as p', 'v.idcliente', '=', 'p.idpersona')
             ->join('detalle_venta as dv', 'v.idventa', '=', 'dv.idventa')
             ->join('articulo as a','dv.idarticulo','=',"a.idarticulo")
@@ -144,7 +144,7 @@ class VentaController extends Controller
             ->where('d.idventa', '=', $id)
             ->get();
 
-   		return view("ventas.venta.show",["venta"=>$venta,"detalles"=>$detalles]);
+      return view("ventas.venta.show",["venta"=>$venta,"detalles"=>$detalles]);
    }
    
    public function destroy($id)
