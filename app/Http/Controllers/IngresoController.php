@@ -111,7 +111,6 @@ class IngresoController extends Controller
             ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
             ->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado', DB::raw('i.estado,COUNT(*) as total'))
             ->where('i.idingreso', '=', $id)
-           // ->groupBy('i.fecha_hora','p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado')
             ->first();
 
         $detalles=DB::table('detalle_ingreso as d')
