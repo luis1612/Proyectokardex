@@ -32,7 +32,7 @@ class IngresoController extends Controller
           $ingresos=DB::table('ingreso as i')
           ->join('persona as p', 'i.idproveedor', '=', 'p.idpersona')
           ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
-          ->select('i.fecha_hora', 'p.nombre', 'i.tipo_comprobante','i.num_comprobante','i.estado', DB::raw('i.estado ,COUNT(*) as total'))
+          ->select('i.idingreso', 'p.nombre', 'i.tipo_comprobante','i.num_comprobante','i.estado', DB::raw('i.estado ,COUNT(*) as total'))
           ->where('p.nombre', 'LIKE', '%'.$query.'%')
           ->orwhere ('p.nombre','LIKE','%'.$query.'%')
           ->orderBy('i.num_comprobante', 'desc')
@@ -111,6 +111,7 @@ class IngresoController extends Controller
             ->join('detalle_ingreso as di', 'i.idingreso', '=', 'di.idingreso')
             ->select('i.idingreso', 'i.fecha_hora', 'p.nombre', 'i.tipo_comprobante', 'i.num_comprobante', 'i.estado', DB::raw('i.estado,COUNT(*) as total'))
             ->where('i.idingreso', '=', $id)
+            ->groupBy('i.idingreso','p.nombre', 'i.tipo_comprobante', 'i.num_comprobante','total' ,'i.estado')
             ->first();
 
         $detalles=DB::table('detalle_ingreso as d')
