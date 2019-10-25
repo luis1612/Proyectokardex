@@ -43,7 +43,7 @@
 					<td>{{$art->categoria }}</td>
 					<td>{{$art->stock}}</td>
 					<td>
-						<img src="{{asset('imagenes/articulos/'.$art->imagen)}}" alt="{{$art->nombre}}" height="100px" width="100px" onmouseover="this.width=400;this.height=300;" onmouseout="this.width=100;this.height=80;">
+						<img src="{{asset('imagenes/articulos/'.$art->imagen)}}" alt="{{$art->nombre}}"alt="{{ $art->nombre }}" height="100" width="100" class="img-thumbnail">
 					</td>
 					<td>{{$art->estado}}</td>
 					<td>@if(Auth::user()->tipo_usuario == 'administrador')
