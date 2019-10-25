@@ -196,7 +196,7 @@ $readNotifications=auth()->user()->readNotifications;
             </li> 
               @endif
              <li>
-              <a href="{{url('acercade')}}">
+              <a href="{{url('ayuda')}}">
                 <i class="fa fa-plus-square"></i> <span>Ayuda</span>
                 <small class="label pull-right bg-red">PDF</small>
               </a>
@@ -479,7 +479,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#').DataTable( {/*
+        $('#ttTable').DataTable( {/*
                     lengthMenu: [
                         [ 10, 25, 50, -1 ],
                         [ '10 rows', '25 rows', '50 rows', 'Show all' ]
@@ -527,7 +527,7 @@ $readNotifications=auth()->user()->readNotifications;
     <script>
         $(document).ready(function() {
               responsive: true
-        $('#').DataTable( {
+        $('#ttTable').DataTable( {
                   "search": {
                       "smart": true
                   },
