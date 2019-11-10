@@ -820,12 +820,12 @@ $readNotifications=auth()->user()->readNotifications;
           } );
     </script>
     <script>
-         $(document).ready(function() {
-    $('#exa').DataTable( {
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+    $(document).ready(function() {
+      $('#exa').DataTable( {
+          dom: 'Bfrtip',
+          buttons: [
+              'copy', 'csv', 'excel', 'pdf', 'print'
+              ]
         } );
     } );
     </script>
