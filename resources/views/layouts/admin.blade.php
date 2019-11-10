@@ -14,7 +14,7 @@ $readNotifications=auth()->user()->readNotifications;
 
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.datatables.min.css')}}">
@@ -729,6 +729,7 @@ $readNotifications=auth()->user()->readNotifications;
     <!-- AdminLTE App -->
     <script src="{{asset('js/tableToExcel.js')}}"></script> <!-- Exportar Excel -->
     <script src="{{asset('js/app.min.js')}}"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -817,6 +818,10 @@ $readNotifications=auth()->user()->readNotifications;
               } );
           } );
     </script>
-
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
   </body>
 </html>
