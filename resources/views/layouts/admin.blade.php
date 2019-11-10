@@ -821,7 +821,7 @@ $readNotifications=auth()->user()->readNotifications;
     </script>
     <script>
          $(document).ready(function() {
-    $('#example').DataTable( {
+    $('#exa').DataTable( {
         dom: 'Bfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
