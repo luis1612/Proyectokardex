@@ -732,103 +732,103 @@ $readNotifications=auth()->user()->readNotifications;
     <script src="{{asset('js/app.min.js')}}"></script>
 
 
-    <script>
-        $(document).ready(function() {
-              responsive: true
-        $('#testTable').DataTable( {/*
-                    lengthMenu: [
-                        [ 10, 25, 50, -1 ],
-                        [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-                    ],
-                    buttons: [
-                        'pageLength'
-                    ],*/
-                  "search": {
-                      "smart": true
-                  },
-                  "lengthMenu": [ [10, 25, 50,100, -1], [10, 25, 50,100, " Todos "] ],
-                  dom: "B&gt;'col-sm-4'f&gt;",//'Bfrtip',
-                  buttons: [
-                      'copy', 'csv', 'excel', 'pdf', 'print',
-                  ],
-                    "search": true,
-                    "smart": true ,
-                  "language": {
-                        "sProcessing":     "Procesando...",
-                        "sLengthMenu":     "Mostrar _MENU_ registros",
-                        "sZeroRecords":    "No se encontraron resultados",
-                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                        "sInfoPostFix":    "",
-                        "sSearch":         "Buscar:",
-                        "sUrl":            "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "oPaginate": {
-                          "sFirst":    "Primero",
-                          "sLast":     "Último",
-                          "sNext":     "Siguiente",
-                          "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        }
-                      }
-              } );
-          } );
-    </script>
-    <script>
-        $(document).ready(function() {
-              responsive: true
-        $('#ttTable').DataTable( {
-                  "search": {
-                      "smart": true
-                  },
-                  "lengthMenu": [ [10, 25, 50,100, -1], [10, 25, 50,100, " Todos "] ],
-                  dom: "B&gt;'col-sm-4'f&gt;",//'Bfrtip',
-                  buttons: [
-                      'copy', 'csv', 'excel', 'pdf', 'print'
-                  ],
-                  "language": {
-                        "sProcessing":     "Procesando...",
-                        "sLengthMenu":     "Mostrar _MENU_ registros",
-                        "sZeroRecords":    "No se encontraron resultados",
-                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                        "sInfoPostFix":    "",
-                        "sSearch":         "Buscar:",
-                        "sUrl":            "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "oPaginate": {
-                          "sFirst":    "Primero",
-                          "sLast":     "Último",
-                          "sNext":     "Siguiente",
-                          "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        }
-                      },
-              } );
-          } );
-    </script>
-    <script>
+<script>
     $(document).ready(function() {
-      $('#exa').DataTable( {
-          dom: 'Bfrtip',
-          buttons: [
-              'copy', 'csv', 'excel', 'pdf', 'print'
-              ]
-        } );
+          responsive: true
+    $('#testTable').DataTable( {/*
+                lengthMenu: [
+                    [ 10, 25, 50, -1 ],
+                    [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                ],
+                buttons: [
+                    'pageLength'
+                ],*/
+              "search": {
+                  "smart": true
+              },
+              "lengthMenu": [ [10, 25, 50,100, -1], [10, 25, 50,100, " Todos "] ],
+              dom: "B&gt;'col-sm-4'f&gt;",//'Bfrtip',
+              buttons: [
+                  'copy', 'csv', 'excel', 'pdf', 'print',
+              ],
+                "search": true,
+                "smart": true ,
+              "language": {
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                      "sFirst":    "Primero",
+                      "sLast":     "Último",
+                      "sNext":     "Siguiente",
+                      "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                  }
+          } );
+      } );
+</script>
+<script>
+    $(document).ready(function() {
+          responsive: true
+    $('#ttTable').DataTable( {
+              "search": {
+                  "smart": true
+              },
+              "lengthMenu": [ [10, 25, 50,100, -1], [10, 25, 50,100, " Todos "] ],
+              dom: "B&gt;'col-sm-4'f&gt;",//'Bfrtip',
+              buttons: [
+                  'copy', 'csv', 'excel', 'pdf', 'print'
+              ],
+              "language": {
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                      "sFirst":    "Primero",
+                      "sLast":     "Último",
+                      "sNext":     "Siguiente",
+                      "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                  },
+          } );
+      } );
+</script>
+<script>
+$(document).ready(function() {
+  $('#exa').DataTable( {
+      dom: 'Bfrtip',
+      buttons: [
+          'copy', 'csv', 'excel', 'pdf', 'print'
+          ]
     } );
-    </script>
+} );
+</script>
 
   </body>
 </html>
