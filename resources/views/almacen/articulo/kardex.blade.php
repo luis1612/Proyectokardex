@@ -9,7 +9,7 @@
 <div class="row">
   <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
     <div class="table-responsive bg-success">
-      <table id="testTable" class="table table-striped table-bordered table-condensed table-hover " id="kardex_salida" width="100%">
+      <table id="ttTable" class="table table-striped table-bordered table-condensed table-hover " id="kardex_salida" width="100%">
         <caption><strong>KARDEX DE SALIDA</strong></caption>
         <p class="hidden" >{{$cantidad_salida=0}}</p>
         <thead>
