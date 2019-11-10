@@ -13,6 +13,7 @@ $readNotifications=auth()->user()->readNotifications;
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.datatables.min.css')}}">
@@ -31,7 +32,7 @@ $readNotifications=auth()->user()->readNotifications;
 
     <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
 
-
+    <script src="cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" type="text/javascript" charset="utf-8" async defer></script>
     <script src="tableToExcel.js"></script>
     <script src="FileSaver.js"></script>
     <script src="tableexport.js"></script>
@@ -815,44 +816,6 @@ $readNotifications=auth()->user()->readNotifications;
               } );
           } );
     </script>
-    <script>
-        $(document).ready(function() {
-              responsive: true
-        $('#tTable').DataTable( {
-                  "search": {
-                      "smart": true
-                  },
-                  "lengthMenu": [ [10, 25, 50,100, -1], [10, 25, 50,100, " Todos "] ],
-                  dom: "B&gt;'col-sm-4'f&gt;",//'Bfrtip',
-                  buttons: [
-                      'copy', 'csv', 'excel', 'pdf', 'print'
-                  ],
-                  "language": {
-                        "sProcessing":     "Procesando...",
-                        "sLengthMenu":     "Mostrar _MENU_ registros",
-                        "sZeroRecords":    "No se encontraron resultados",
-                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                        "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                        "sInfoPostFix":    "",
-                        "sSearch":         "Buscar:",
-                        "sUrl":            "",
-                        "sInfoThousands":  ",",
-                        "sLoadingRecords": "Cargando...",
-                        "oPaginate": {
-                          "sFirst":    "Primero",
-                          "sLast":     "Último",
-                          "sNext":     "Siguiente",
-                          "sPrevious": "Anterior"
-                        },
-                        "oAria": {
-                          "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                          "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                        }
-                      },
-              } );
-          } );
-    </script>
+
   </body>
 </html>
