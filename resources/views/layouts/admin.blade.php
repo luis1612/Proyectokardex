@@ -14,8 +14,7 @@ $readNotifications=auth()->user()->readNotifications;
 
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-
+    
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/bootstrap-select.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.datatables.min.css')}}">
@@ -38,14 +37,8 @@ $readNotifications=auth()->user()->readNotifications;
     <script src="tableToExcel.js"></script>
     <script src="FileSaver.js"></script>
     <script src="tableexport.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script src="bootstrap-checkbox.js" defer></script>
     @stack('styles')
-    <script>
-      $(document).ready( function () {
-      $('#table_id').DataTable();
-        } );
-    </script>
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
