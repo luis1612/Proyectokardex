@@ -60,7 +60,7 @@
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 			<div class="form-group">
 				<label for="stock">Stock</label>
-				<input type="number" name="stock" required value="{{old('stock')}}" class="form-control" placeholder="Stock del Artículo...."> 
+				<input type="number" name="stock" required value="{{old('stock')}}" class="form-control" min="0" step="0.01" placeholder="Stock del Artículo...."> 
 			</div>
 		</div>
 		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
